@@ -1,0 +1,115 @@
+1. In your own words, explain what clean code is and why it is important.
+
+A: Clean code is code that is easily understood without excessive comments. It must be modular and not have functions that do too much. Code should not be nested more than two levels deep to reduce confusion. Clean code is important so that other coders and yourself can understand how to code works in order to fix bugs or implement new features in the future.
+
+2.Read this article about Toyota and their use of bad code. Although you may not yet understand all of the topics discussed, think about another commonly used object that relies on computers and explain what would happen if the code was not created to an acceptable standard.
+
+A: What happened to the driver of that Toyota vehicle is devastating. The integration f computers into everyday objects can be incredibly helpful but can be catastrophic if the code is not sound. Any object that uses a computer to perform tasks could malfunction if it is given bad code. Fore example, if the code that the computers on an airplane run were to contain a bug, the landing gear might not deploy, or the engines may overheat. This could cause many fatalities and is one reason why code written for such operations must be 100% fail-safe.  
+
+3. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
+
+A. No. This code is not clean. Here it is refactored:
+
+FUNCTION convertToCelsius(fahrenheit)
+	//formula to convert fahrenheit to celsius 
+	SET celcius = (fahrenheit − 32) * (5/9) 
+	PRINT celsius
+END FUCNCTION
+
+FUNCTION convertToFahrenheit(celsius)
+	//formula to convert celsius to fahrenheit
+	SET fahrenheit = (celsius * 1.8000) + 32.00
+	PRINT fahrenheit
+END FUNCTION
+
+4. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
+
+A: Yes, this code is clean. It is obvious what the code is intended to do and it only does what it is intended to do. 
+
+5. Using pseudocode, refactor the code for the following examples using the principles you have learned in this checkpoint.
+
+	a.  FUNCTION receivePayment(price, paymentType)
+		
+	        IF paymentType = "cash"
+			PROMPT "Enter amount of cash given"
+			INPUT cashAmount
+			PRINT "Your change is: " cashAmount - price
+		ELSE
+			PRINT "Credit card charged: $" + price
+	
+	    END FUNCTION
+
+	    FUNCTION applyDiscount(subTotal, discountRate)
+		SET discountedSubTotal = subTotal * discountRate
+		RETURN discountedSubTotal
+	    END FUNCTION
+
+	    FUNCTION getTax(subTotal)
+		SET tax = subTotal * taxRate
+		RETURN tax
+	    END FUNCTION
+
+            FUNCTION checkOutCustomer(paymentType, subTotal)
+		SET grandTotal = applyDiscount(subtotal) + getTax(subTotal)
+		PRINT "Total due: " + grandTotal
+		
+		CALL receivePayment(grandTotal, paymentType)
+	    END FUNCTION
+
+
+	b.  FUNCTION hasIssues(guest)
+		IF guest.hasOverDueBooks OR guest.outstandingFees > 0 THEN
+			RETURN TRUE
+		ELSE 
+			RETURN FALSE
+	    END FUNCTION
+
+	    FUNCTION checkoutBook(book, guest)
+		IF guest.hasIssues THEN
+			PRINT "UNABLE TO CHECKOUT BOOK"
+		ELSE
+			APPEND book to guest.books
+			SET book.status to "CHECKED OUT"
+			PRINT "Your books have been issued"
+	    END FUNCTION
+		
+
+	c. This code already looks clean to me. No need to refactor.
+
+		
+6. Given an array of integers, find out whether the sum of the integers is a perfect square. If it is a perfect square, return the square root, otherwise return the sum.
+
+	function getSquare(array) {
+  		let total = 0
+  		array.map( num => total += num)
+  		let squareRoot = Math.sqrt(total)
+ 	return squareRoot % 1 === 0 ? squareRoot : total
+	}
+
+7. Duplicate Given an array of integers, find out whether the array contains any duplicate elements. The function should return true if any value appears at least twice in the array, and false if every element is distinct.
+
+function hasDuplicateNumbers(array){
+  for (i = 0; i < array.length - 1; i++){
+    for (j = i + 1; j < array.length; j++){
+      if (array[i] == array[j]){
+        return true
+      }
+    }
+  }
+  return false
+}
+
+EXTRA CREDIT. An anagram is a word, phrase, or name formed by rearranging the letters of another word. For example, spar can be formed from rasp. Given two strings, stringOne and stringTwo, determine if stringOne is an anagram of stringTwo. Assume that the strings contain only lowercase letters and do not worry about case-sensitivity. Hint: Your first task will be to convert the strings to arrays.
+
+function areAnagrams(string1, string2) {
+    if (string1.split('').sort().join('') == string2.split('').sort().join('')){
+      return true
+    }
+    else{
+      return false
+    }
+};
+
+
+ 
+
