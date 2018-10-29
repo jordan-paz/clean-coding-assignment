@@ -1,7 +1,7 @@
 class Line {
-  constructor(p){
+  constructor(newPeople){
     this.people = [];
-    p.map((person) => this.people.push(person));
+    newPeople.map((person) => this.people.push(person));
   }
 
   findPerson(name) {
