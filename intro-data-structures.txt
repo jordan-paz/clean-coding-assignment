@@ -1,0 +1,45 @@
+class Line {
+  constructor(p){
+    this.people = [];
+    p.map((person) => this.people.push(person));
+  }
+
+  findPerson(name) {
+    let spotInLine = this.people.findIndex((person) => person == name);
+    return spotInLine == -1 ? name + ' is not in this line' : name + ' is at spot ' + spotInLine
+  }
+
+  cutInLine(personInLine, personCutting) {
+    this.people.splice(this.people.indexOf(personInLine), 0, personCutting)
+  }
+
+  removeFromLine(person){
+    this.people.splice(this.people.indexOf(person), 1)
+  }
+}
+
+/////////////////////////////TESTS/////////////////////////////////
+
+let newPeople = ['vivian', 'ava', 'josh', 'patrick', 'mike']
+let newLine = new Line(newPeople)
+
+console.log("Let's find Josh.")
+console.log(newLine.findPerson('josh'))
+console.log("Let's find Emily")
+console.log(newLine.findPerson('emily'))
+
+console.log('Melissa cut in front of Ava!')
+newLine.cutInLine('ava', 'melissa');
+console.log("current status of line: " + newLine.people.join())
+
+console.log('Patrick left the line.')
+newLine.removeFromLine('patrick');
+console.log("current status of line: " + newLine.people.join())
+
+/*
+Question #2: Provide another real-world example that you can model using a data structure.
+  A: A human can be modeled using the object data type. The object can be given attributes in the form of key-value pairs such as name, height, hair color, etc. It can also be given methods such as sayHello, eat, and sleep.
+
+Question #3: How would your data structure allow developers to access and manipulate the data?
+  A: A developer can call the methods with person.method(). They can also get the values for the attributes with person.attribute.
+*/
