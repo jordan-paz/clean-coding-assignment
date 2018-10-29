@@ -1,0 +1,57 @@
+1. What is the main difference between a stack and a queue?
+	A: A stack operates using LIFO (last in, first out) while a queue operates using FIFO(first in, first out).
+
+2. What are the similarities between stacks and queues?
+	A: Both are linear data structures. Both are flexible in size. 
+
+3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+	A: I would use a stack for each. Because UNDO should remove the the text entered LAST, a LIFO system is optimal. As a new piece of text is entered, it would be added to the top of the stack, and UNDO would only need to go to the top of the stack to remove the correct text. For REDO to be able to re-enter the text that was removed with UNDO, it must maintain a stack that adds each element removed by the UNDO function. Then, the newest element added to its stack- the element to be removed using UNDO- can be easily accessed at the op of the stack.
+
+---------------------------------PROGRAMMING QUESTIONS----------------------------------
+
+1. Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+	A: 
+
+	let reverse = function(word) {
+ 		let stack = [];
+  		for (i = 0; i < word.length; i++) {
+    			stack.push(word.charAt(i))
+  		}
+  		let reversedWord = [];
+  		while(stack.length > 0) {
+    			reversedWord.push(stack.pop());
+ 		}
+  		console.log(reversedWord)
+	}
+
+2. Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+	* I am VERY confused by this question, but here's my best shot: 
+
+	A: 
+	
+	let popQueue = function(queue) {
+		let poppedElement = queue[queue.length - 1]
+		queue.splice(-1, 1) 
+		return poppedElement
+		}
+	}
+
+3. Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+	A: class Queue {
+		constructor(array){
+			this.array = [];
+			array.map((element) => this.array.push(element));
+		}
+		enqueue(element){
+			this.array.push(element);
+		}   
+		
+		dequeue(){
+			/* The shift() method removes the first element from an array and returns that removed element */
+			this.array.shift()
+		}
+	   }
+
