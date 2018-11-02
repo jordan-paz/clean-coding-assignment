@@ -1,0 +1,42 @@
+1. What are some pros and cons of using linked lists instead of arrays?
+
+	A: Linked lists are able to be dynamically allocated data. Because arrays must exist as a single block of data, they must exist within one location in memory that can fit the entire array. A linked list, however, can have elements in different locations of memory, completely separate from the other members of the linked list. This way, a linked list can be as large as there are empty memory locations, even if those memory locations are cut off from each other by other stores of data. The pointer is what allows the machine to know the location of the next element in the list. While an array can be searched through quite efficiently using several different algorithms, a linked list must be searched through sequentially from start to finish. This is mush less efficient than, say, a binary search which can be performed on an array with its elements sorted and indexed.
+
+2. Come up with a real world example of a linked list.
+
+	A: When people give directions to a location, they often give it in the form of a linked list. Example: 
+	
+	1. Location 1: YOUR HOUSE
+		GO 2 blocks south until you reach the streetlight
+	
+	2. Location 2: AT streetlight
+		TURN LEFT, go until you pass the red house.
+	
+	3. Location 3: Red house
+		TURN RIGHT, go until you pass the train tracks
+	
+	4. Location 4: Train tracks
+		TURN RIGHT at next street, donut store will be on the right.
+	
+	5. Location 5: Donut Store. VICTORY!
+
+<---------------------------------PROGRAMMING QUESTIONS--------------------------------->
+
+1. The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+ SET current.next to node
+END IF
+END FUNCTION	
+
+	A: The function does not take the argument of the current node. It needs to know what the last node is in the list in order to change the pointer of the last node to point to the new node. Here it is, fixed, in javascript:
+
+	

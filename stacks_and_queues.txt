@@ -31,11 +31,13 @@
 
 	A: 
 	
-	let popQueue = function(queue) {
-		let poppedElement = queue[queue.length - 1]
-		queue.splice(-1, 1) 
-		return poppedElement
-		}
+	popQueue = function(queue) {
+		let poppedQueue = [];
+		for (i = 0; i < queue.length - 1; i ++) {
+			poppedQueue(queue[i]);
+			dequeue(queue);
+			return poppedQueue;
+		} 
 	}
 
 3. Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
