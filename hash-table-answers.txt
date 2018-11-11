@@ -1,0 +1,244 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red255\green255\blue255;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;\csgray\c100000;
+}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww16520\viewh13940\viewkind0
+\deftab720
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\partightenfactor0
+\ls1\ilvl0
+\f0\fs32 \cf2 \cb3 1. What is a hash table?\
+\
+	A: A hash table is a data structure comprised of key value pairs. They use the process of hashing to choose an index for the data. The key and value can be of any data type.\
+\
+2. What is hashing?\
+\
+	A: Hashing is the process of running a piece of data or a value through a function that outputs a unique number. The function must be deterministic. \
+\
+3. How does a hash table store data?\
+\
+	A: A hash table stores data in key value pairs. The index is hash, usually converted to a smaller integer. When a piece of data has the same hash as another, it is called a collision. In this case, any pieces of data that share the same hash are put into a linked list with a head node at the original index.\
+\
+4. How are hash tables and objects different?\
+\
+	A: They are essentially the same. Both are comprised entirely of key value pairs. The only difference is that a hash table uses a hash function to designate the indices for each key value pair. This allows for future searches of specific pieces of data to be much easier. All you have to do is run the piece of data you want to find through the hash function and the index will be output.\
+\
+5. Determine whether you would use a hash table or an object to store each of the following pieces of data:\
+\
+	a. A list of pets and their unique names\
+		A: I would use a hash table. The keys would be the pets\'92 names and the values would be the breed. If there were thousands of pets then a hash table would make searching for specific pets by name easier.\
+\
+	b. The name, age, and the birthday of your best friend.\
+		A: I would use an object. This does not require the complexity of a hash table.\
+\
+	c. The name and location of every company in a given city.\
+		A: I would use a hash table. There could be hundreds of businesses in a given city. Searching for them by name will be much easier if they are put into a hash table.\
+\
+\
+	d. All of the books checked out from a library by a particular individual.\
+		A: I would use an object. It is unlikely that a person will have more than 5 books checked. No need for the complexity of a hash table.\
+\
+	e. The primary and secondary phone numbers for a contact\
+		A: An object. This doesn\'92t require complexity of a hash table.\
+\
+6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.\
+\
+7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.\
+\
+8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store.\
+\
+const readline = require('readline-sync');\
+\
+class HashTable\{\
+  constructor(size)\{\
+    this.data = [];\
+    this.size = size;\
+  \}\
+  getHash(key)\{\
+  var hash = 0, i, chr;\
+  for (i = 0; i < key.length; i++) \{\
+    chr = key.charCodeAt(i);\
+    hash = ((hash << 5) - hash) + chr;\
+    hash |= 0; // Convert to 32bit integer\
+  \}\
+  console.log(hash)\
+  return hash;\
+\};\
+  insert(item)\{\
+    this.data[this.getHash(item.key)] = item;\
+  \}\
+  get(key)\{\
+    return this.data[this.getHash(key)]\
+  \}\
+\}\
+\
+//QUESTION 6//\
+\
+let customers = new HashTable(1000);\
+\
+customers.addCustomers = function (name, address, phoneNumber)\{\
+\
+  if(name && address && phoneNumber)\{\
+    let customer = \{\
+      key: name,\
+      address: address,\
+      phoneNumber: phoneNumber\
+    \}\
+    this.insert(customer);\
+  \}\
+  else\{\
+    let userInput = readline.question("Would you like to add a customer? Enter 'y' to continue. ");\
+    while (userInput == 'y')\{\
+      let customer = \{\
+        name: readline.question("Enter name "),\
+        address: readline.question("Enter address "),\
+        key: readline.question("Enter phone number ")\
+      \}\
+      this.insert(customer)\
+      userInput = readline.question("Would you like to add another customer? Enter 'y' to continue. ");\
+    \}\
+  \}\
+\}\
+\
+customers.lookUpCustomers = function() \{\
+  let userInput = readline.question("Would you like to look up a customer? Enter 'y' to continue. ");\
+  while (userInput == 'y')\{\
+    let phoneNumber = readline.question("Enter phone number ");\
+    console.log(this.get(phoneNumber));\
+    userInput = readline.question("Would you like to look up another customer? Enter 'y' to continue. ");\
+  \}\
+\}\
+\
+customers.addCustomers();\
+customers.lookUpCustomers();\
+\
+//QUESTION 7//\
+\
+let inventoryHashTable = new HashTable(1000);\
+\
+class Product\{\
+  constructor(name, amount)\{\
+    this.key = name;\
+    this.amount = amount;\
+  \}\
+\}\
+\
+inventoryHashTable.createProducts = function(name, amount) \{\
+  if (name && amount) \{\
+    this.insert(\{\
+      key: name,\
+      amount: amount\
+    \})\
+  \}\
+  else \{\
+    let userInput = readline.question("Create a new product? Enter 'y' to continue. ");\
+    while(userInput == 'y')\{\
+      let newProduct = \{\
+        key: readline.question("Enter product name "),\
+        amount: parseInt(readline.question("Enter initial inventory quantity "))\
+      \}\
+      this.insert(newProduct);\
+      userInput = readline.question("Would you like to create another new product? Enter 'y' to continue. ");\
+    \}\
+  \}\
+\}\
+\
+inventoryHashTable.editInventory = function(name, amountChanged) \{\
+  if(name && amountChanged)\{\
+    let newAmount = inventoryHashTable.data[this.getHash(name)].amount + amountChanged;\
+    this.insert(\{\
+      key: name,\
+      amount: newAmount\
+    \})\
+  \}\
+  else\{\
+    let userInput = readline.question("Edit inventory? Enter 'y' to continue.");\
+    while(userInput == 'y')\{\
+      let name = readline.question("Enter product name to edit the inventory ");\
+      let amountChanged = parseInt(readline.question("Enter amount to add or remove. Include a (-) if removing "))\
+      let oldAmount = this.get(name).amount;\
+      let newAmount = oldAmount + amountChanged;\
+      this.insert(\{\
+        key: name,\
+        amount: newAmount\
+      \})\
+      userInput = readline.question("Edit inventory of another product? Enter 'y' to continue. ");\
+    \}\
+  \}\
+\}\
+\
+inventoryHashTable.seeInventory = function(name) \{\
+  if(name) \{\
+    console.log(this.get(name))\
+  \}\
+  else \{\
+    let userInput = readline.question("Check inventory of a product? Enter 'y' to continue ");\
+    let name = ''\
+    while(userInput == 'y')\{\
+      name = readline.question("Enter product name to see inventory. ");\
+      console.log(this.get(name).amount);\
+      userInput = readline.question("Search for another product? y/n ");\
+    \}\
+  \}\
+\}\
+\
+inventoryHashTable.createProducts();\
+inventoryHashTable.editInventory();\
+inventoryHashTable.seeInventory();\
+\
+\
+//QUESTION 8//\
+\
+let archive = new HashTable(100)\
+archive.otherData = [];\
+\
+archive.insertPaper = function(newPaper)\{\
+  this.data[this.getHash(newPaper.publisher)] = newPaper;\
+  this.otherData[this.getHash(newPaper.publishDate)] = newPaper;\
+\}\
+archive.addPaper = function(title, publisher, publishDate)\{\
+  if(title && publisher && publishDate)\{\
+    let newPaper = new Paper(title, publisher, publishDate);\
+    this.insertPaper(newPaper);\
+  \}\
+  else\{\
+    let userInput = readline.question("Add a newspaper? Enter 'y' to continue. ");\
+    while(userInput == 'y')\{\
+      let title = readline.question("Enter title ");\
+      let publisher = readline.question("Enter publisher ");\
+      let publishDate = readline.question("Enter publish date ");\
+      let newPaper = new Paper(title, publisher, publishDate);\
+      this.insertPaper(newPaper);\
+      userInput = readline.question("Add another newspaper? Enter 'y' to continue. ");\
+    \}\
+  \}\
+\}\
+archive.search = function()\{\
+  let userInput = readline.question("Searh for a newspaper? Enter 'y' to continue. ");\
+  while(userInput == 'y')\{\
+    let userChoice = readline.question("Enter 'publisher' of 'publish date' to choose search method ");\
+    if(userChoice == 'publisher')\{\
+      let publisher = readline.question("Enter publisher ");\
+      console.log (this.data[this.getHash(publisher)])\
+    \}\
+    else if(userChoice == 'publish date')\{\
+      let publishDate = readline.question("Enter publish date ");\
+      console.log (this.otherData[this.getHash(publishDate)])\
+    \}\
+  userInput = readline.question("Search for another paper? Enter 'y' to continue. ");\
+  \}\
+\}\
+class Paper\{\
+  constructor(title, publisher, publishDate)\{\
+    this.title = title;\
+    this.publisher = publisher;\
+    this.publishDate = publishDate;\
+  \}\
+\}\
+\
+archive.addPaper();\
+archive.search();\
+\ls1\ilvl0\cf4 ssary data.}
