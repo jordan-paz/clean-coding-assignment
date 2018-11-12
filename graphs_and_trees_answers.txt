@@ -1,0 +1,34 @@
+1. What is a binary tree and what makes it unique to other trees?
+	A: A binary tree is a data structure which organizes data into a tree-like structure. Each node in the tree can have two children nodes, a left and a right. Each node must contain a value and a pointer pointing to the next node or nodes. It is unique because each node can only have two child nodes, hence the 'binary' in the name.
+
+2. What is a heuristic?
+	A: A heuristic is essentially an educated guess. It is a quick decision based on the available information. In computer science, heuristics is used when a problem is too complex to find a single solution.
+
+3. What is another problem besides the shortest-path problem that requires the use of heuristics?
+	A: Heuristics are used in our everyday lives. People use heuristics to determine what to say to another individual when conversing. They use the available data they have about the person to make a best choice. This can result in offending the other person or a pleasant conversation. 
+
+4. What is the difference between a depth-first search and a breadth-first search?
+	A: A depth-first search searches vertically  down a branch and then each branch sequentially until the target is found. The breadth-first search goes across branches, horizontally.
+
+5. Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+	A: A data structure organized into nodes which have an ambiguous connection with no one direction connecting the nodes. There is a start and an end, if you follow the path from the first to the last you will not end up back at the first node. The cost of traveling from one node to another is not known.
+
+6. What kind of graph is a binary search tree? 
+	A: Directed and a-cyclic.
+
+-----------------------------PROGRAMMING QUESTIONS-----------------------------
+
+1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+Start at the top node. If the target value is the same as the current node, return true. If the target value is less than the current node, move left. If the target value is greater than the current node, move right. If you cannot move right, move left. If you are at the bottom, go back to the top node and start over, going to un-searched nodes when possible. 
+
+2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+
+First perform a breadth search to find both nodes. 
+Count the number of moves that each node is from the lowest common ancestor. 
+The number of moves is the distance.
+
+
+
+    
