@@ -140,12 +140,18 @@ inventoryHashTable.seeInventory();
 
 //QUESTION 8//
 
+class Paper{
+  constructor(title, publisher, publishDate){
+    this.title = title;
+    this.publisher = publisher;
+    this.publishDate = publishDate;
+  }
+}
+
 let archive = new HashTable(100)
-archive.otherData = [];
 
 archive.insertPaper = function(newPaper){
-  this.data[this.getHash(newPaper.publisher)] = newPaper;
-  this.otherData[this.getHash(newPaper.publishDate)] = newPaper;
+  this.data[this.getHash(newPaper.publisher + newPaper.publishDate)] = newPaper;
 }
 archive.addPaper = function(title, publisher, publishDate){
   if(title && publisher && publishDate){
@@ -167,25 +173,13 @@ archive.addPaper = function(title, publisher, publishDate){
 archive.search = function(){
   let userInput = readline.question("Searh for a newspaper? Enter 'y' to continue. ");
   while(userInput == 'y'){
-    let userChoice = readline.question("Enter 'publisher' of 'publish date' to choose search method ");
-    if(userChoice == 'publisher'){
       let publisher = readline.question("Enter publisher ");
-      console.log (this.data[this.getHash(publisher)])
-    }
-    else if(userChoice == 'publish date'){
       let publishDate = readline.question("Enter publish date ");
-      console.log (this.otherData[this.getHash(publishDate)])
-    }
+      console.log (this.data[this.getHash(publisher + publishDate)])
+  }
   userInput = readline.question("Search for another paper? Enter 'y' to continue. ");
-  }
 }
-class Paper{
-  constructor(title, publisher, publishDate){
-    this.title = title;
-    this.publisher = publisher;
-    this.publishDate = publishDate;
-  }
-}
+
 
 archive.addPaper();
 archive.search();

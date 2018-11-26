@@ -22,12 +22,27 @@
 
 Start at the top node. If the target value is the same as the current node, return true. If the target value is less than the current node, move left. If the target value is greater than the current node, move right. If you cannot move right, move left. If you are at the bottom, go back to the top node and start over, going to un-searched nodes when possible. 
 
+FUNCTION findNode(tree, value)
+	SET currentNode = first node
+	WHILE there are remaining nodes
+		IF (currentNode value == value) THEN
+			RETURN currentNode
+		ELSE IF (currentNode value < value) THEN
+			SET currentNode = right node
+		ELSE 
+			SET currentNode = left node
+	END WHILE
+	RETURN "Node not found"
+
 2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
 
 
 First perform a breadth search to find both nodes. 
 Count the number of moves that each node is from the lowest common ancestor. 
 The number of moves is the distance.
+
+
+
 
 
 
