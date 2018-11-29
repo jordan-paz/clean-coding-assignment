@@ -5,19 +5,26 @@
       this.data = [];
       this.size = size;
     }
+
     getHash(key){
-    var hash = 0, i, chr;
-    for (i = 0; i < key.length; i++) {
-      chr = key.charCodeAt(i);
-      hash = ((hash << 5) - hash) + chr;
-      hash |= 0; // Convert to 32bit integer
+      var hash = 0, i, chr;
+      for (i = 0; i < key.length; i++) {
+        chr = key.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+      }
+      return hash;
     }
-    console.log(hash)
-    return hash;
-  };
+
     insert(item){
-      this.data[this.getHash(item.key)] = item;
+      if (!this.data[this.getHash(item.key)]) {
+        this.data[this.getHash(item.key)] = item;
+      }
+      else {
+        this.data[this.getHash(item.key)].next = item
+      }
     }
+
     get(key){
       return this.data[this.getHash(key)]
     }
@@ -31,9 +38,9 @@
 
     if(name && address && phoneNumber){
       let customer = {
-        key: name,
+        name: name,
         address: address,
-        phoneNumber: phoneNumber
+        key: phoneNumber
       }
       this.insert(customer);
     }
