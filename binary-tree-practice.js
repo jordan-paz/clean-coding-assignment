@@ -122,4 +122,10 @@ tree.insert(4);
 tree.insert(16);
 tree.insert(6);
 
-console.log(tree.distanceBetweenNodes(12, 8))
+
+console.log(tree.search(tree.root, 5))
+console.log(tree.search(tree.root, 4))
+console.log(tree.search(tree.root, 6))
+console.log(tree.search(tree.root, 16))
+
+console.log('distance between node 16 and 6: ' + tree.distanceBetweenNodes(16, 6) + ' steps')
